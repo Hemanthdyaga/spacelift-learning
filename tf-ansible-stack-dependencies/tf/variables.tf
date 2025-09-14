@@ -1,4 +1,4 @@
 variable "public_key" {
   type    = string
-  default = "/mnt/workspace/keypair.pem"
+  default = "/mnt/workspace/abhikeypair01"
 }

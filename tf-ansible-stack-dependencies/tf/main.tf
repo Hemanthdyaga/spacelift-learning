@@ -48,7 +48,7 @@ resource "aws_instance" "this" {
   for_each                    = local.instances
   ami                         = each.value.ami
   instance_type               = each.value.instance_type
-  key_name                    = "abhikeypair"
+  key_name                    = /mnt/workspace/abhikeypair
   associate_public_ip_address = true
 
   tags = {

@@ -52,7 +52,7 @@ resource "aws_instance" "this" {
   for_each                    = local.instances
   ami                         = each.value.ami
   instance_type               = each.value.instance_type
-  key_name                    = aws_key_pair.ssh_key.key_name
+  key_name                    = abhikeypair
   associate_public_ip_address = true
 
   tags = {

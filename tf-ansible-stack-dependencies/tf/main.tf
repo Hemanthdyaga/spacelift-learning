@@ -1,13 +1,14 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-east-1"
 }
 
+# Fetch the latest Ubuntu 20.04 AMI
 data "aws_ami" "ubuntu" {
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
   }
 
   filter {
@@ -19,7 +20,8 @@ data "aws_ami" "ubuntu" {
     name   = "architecture"
     values = ["x86_64"]
   }
-  owners = ["099720109477"] #canonical
+
+  owners = ["099720109477"] # Canonical
 }
 
 locals {
@@ -43,12 +45,11 @@ locals {
   }
 }
 
-
 resource "aws_instance" "this" {
   for_each                    = local.instances
   ami                         = each.value.ami
   instance_type               = each.value.instance_type
-  key_name                    = /mnt/workspace/abhikeypair
+  key_name                    = "abhikeypair" # key name in AWS, not .pem path
   associate_public_ip_address = true
 
   tags = {
